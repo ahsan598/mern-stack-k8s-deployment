@@ -4,7 +4,7 @@
 # Uses Node.js to install dependencies and build the
 # React application into static files.
 # ======================================================
-FROM node:20-alpine AS build
+FROM node:20-alpine AS builder
 
 # Set working directory inside the container
 WORKDIR /app
@@ -19,7 +19,7 @@ RUN yarn install
 COPY . .
 
 # Build the React application, the output is generated in the /app/build directory
-RUN npm run build
+RUN yarn build
 
 
 # ======================================================
@@ -31,7 +31,7 @@ RUN npm run build
 FROM nginx:1.28-alpine
 
 # Copy the build artifacts from the build stage to Nginx's default web directory
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
 
 # Expose HTTP port
 EXPOSE 80

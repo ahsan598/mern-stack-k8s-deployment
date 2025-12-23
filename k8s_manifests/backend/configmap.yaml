@@ -1,0 +1,11 @@
+# Backend ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: dev
+data:
+  # MongoDB connection string with auth
+  MONGO_CONN_STR: "mongodb://mongodb-service.dev.svc.cluster.local:27017/todo?authSource=admin"
+  USE_DB_AUTH: "true"
+  PORT: "8080"

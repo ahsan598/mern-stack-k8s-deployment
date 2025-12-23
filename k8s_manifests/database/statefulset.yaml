@@ -1,9 +1,11 @@
-# MongoDB Stateful Set
+# MongoDB StatefulSet
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mongodb
   namespace: dev
+  labels:
+    app: mongodb
 spec:
   serviceName: mongodb-service
   replicas: 1
@@ -23,22 +25,27 @@ spec:
         - containerPort: 27017
           name: mongodb
         command:
-            - "mongod"
-            - "--wiredTigerCacheSizeGB"
-            - "0.25"
-            - "--bind_ip"
-            - "0.0.0.0"
+        - "mongod"
+        - "--wiredTigerCacheSizeGB"
+        - "0.25"
+        - "--bind_ip"
+        - "0.0.0.0"
         env:
-          - name: MONGO_INITDB_ROOT_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: mongo-secret
-                key: username
-          - name: MONGO_INITDB_ROOT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mongo-secret
-                key: password
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: username
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: password
+        # Volume mount for data persistence
+        volumeMounts:
+        - name: mongodb-storage
+          mountPath: /data/db
+          subPath: mongodb
         resources:
           requests:
             memory: "512Mi"
@@ -46,11 +53,23 @@ spec:
           limits:
             memory: "1Gi"
             cpu: "500m"
+        # Better health checks
         livenessProbe:
-          tcpSocket:
-            port: 27017
+          exec:
+            command:
+            - mongosh
+            - --eval
+            - "db.adminCommand('ping')"
           initialDelaySeconds: 30
           periodSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - mongosh
+            - --eval
+            - "db.adminCommand('ping')"
+          initialDelaySeconds: 5
+          periodSeconds: 5
   volumeClaimTemplates:
   - metadata:
       name: mongodb-storage

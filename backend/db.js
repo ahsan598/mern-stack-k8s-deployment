@@ -1,3 +1,4 @@
+// db.js (Updated for Kubernetes)
 const mongoose = require("mongoose");
 
 module.exports = async () => {
@@ -13,25 +14,17 @@ module.exports = async () => {
         username: process.env.MONGO_USERNAME,
         password: process.env.MONGO_PASSWORD
       };
-      connectionParams.authSource = 'admin';
+      connectionParams.authSource = 'admin';          // Important!
     }
 
-    const connStr = process.env.MONGO_CONN_STR || 'mongodb://localhost:27017/myapp';
+    const connStr = process.env.MONGO_CONN_STR;
+    console.log('Connecting to:', connStr.replace(/\/\/.*@/, '//***:***@'));
     
     await mongoose.connect(connStr, connectionParams);
-    console.log("Connected to database successfully!");
-
-    // Connection event listeners
-    mongoose.connection.on('error', (err) => {
-      console.error('MongoDB error:', err);
-    });
-
-    mongoose.connection.on('disconnected', () => {
-      console.log('MongoDB disconnected');
-    });
+    console.log("Connected to MongoDB successfully!");
 
   } catch (error) {
-    console.error("Could not connect to database:", error.message);
-    process.exit(1);                // Exit on connection failure
+    console.error("MongoDB connection failed:", error.message);
+    process.exit(1);
   }
 };

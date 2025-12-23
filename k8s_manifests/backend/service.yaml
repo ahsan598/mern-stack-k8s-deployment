@@ -7,8 +7,9 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: node
+    app: backend      # Matching deployment label
   ports:
-  - port: 8080
-    targetPort: 3000
+  - port: 8080        # Service port
+    targetPort: 8080  # Container port
     protocol: TCP
+    name: http

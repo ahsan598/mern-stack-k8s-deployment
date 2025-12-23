@@ -1,11 +1,11 @@
-# MongoDB Service
+# MongoDB Headless Service
 apiVersion: v1
 kind: Service
 metadata:
   name: mongodb-service
   namespace: dev
 spec:
-  clusterIP: None
+  clusterIP: None  # Headless service
   selector:
     app: mongodb
   ports:

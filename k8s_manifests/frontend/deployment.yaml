@@ -5,6 +5,7 @@ metadata:
   name: frontend
   namespace: dev
   labels:
+    app: frontend
     type: frontend
 spec:
   replicas: 2
@@ -15,22 +16,41 @@ spec:
       maxUnavailable: 0
   selector:
     matchLabels:
-      app: react
+      app: frontend         # Consistent label
   template:
     metadata:
       labels:
-        app: react
+        app: frontend
     spec:
       containers:
-      - name: react-app
+      - name: frontend
         image: ahsan98/mern-app:react-1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
+          name: http
+          protocol: TCP
         volumeMounts:
         - name: nginx-config
           mountPath: /etc/nginx/conf.d/default.conf
           subPath: nginx.conf
+        # Health checks added
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 2
         resources:
           requests:
             memory: "128Mi"

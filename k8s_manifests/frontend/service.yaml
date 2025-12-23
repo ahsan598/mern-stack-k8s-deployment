@@ -4,11 +4,14 @@ kind: Service
 metadata:
   name: frontend-service
   namespace: dev
+  labels:
+    app: frontend
 spec:
-  type: ClusterIP
+  type: ClusterIP  
   selector:
-    app: react
+    app: frontend
   ports:
   - port: 80
     targetPort: 80
     protocol: TCP
+    name: http

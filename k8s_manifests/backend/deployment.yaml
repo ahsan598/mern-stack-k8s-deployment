@@ -5,6 +5,7 @@ metadata:
   name: backend
   namespace: dev
   labels:
+    app: backend
     type: backend
 spec:
   replicas: 2
@@ -15,21 +16,37 @@ spec:
       maxUnavailable: 0
   selector:
     matchLabels:
-      app: node
+      app: backend
   template:
     metadata:
       labels:
-        app: node
+        app: backend
     spec:
       containers:
-      - name: node-app
-        image: ahsan98/mern-app:node-1.0
+      - name: backend
+        image: ahsan98/mern-app:node-1.0  # Your backend image
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 3000
+        - containerPort: 8080  # Correct port matching index.js
+          name: http
         env:
-        - name: MONGO_URI
-          value: mongodb://mongo-service:27017/todo
+        # Correct environment variable names from ConfigMap
+        - name: MONGO_CONN_STR
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: MONGO_CONN_STR
+        - name: USE_DB_AUTH
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: USE_DB_AUTH
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: PORT
+        # MongoDB credentials from Secret
         - name: MONGO_USERNAME
           valueFrom:
             secretKeyRef:
@@ -40,16 +57,21 @@ spec:
             secretKeyRef:
               name: mongo-secret
               key: password
+        # Correct health checks
         livenessProbe:
-          tcpSocket:
+          httpGet:
+            path: /ok
             port: 8080
           initialDelaySeconds: 30
           periodSeconds: 10
+          timeoutSeconds: 5
         readinessProbe:
-          tcpSocket:
+          httpGet:
+            path: /ok
             port: 8080
           initialDelaySeconds: 5
           periodSeconds: 5
+          timeoutSeconds: 3
         resources:
           requests:
             memory: "256Mi"

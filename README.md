@@ -30,7 +30,7 @@ The goal is to provide a hands-on reference implementation for building and depl
 
 
 ### Architect Diagram
-
+![architect](/assets/images/architect-diagram.gif)
 
 
 ### 🧪 Local Testing (Before Kubernetes)

@@ -26,18 +26,19 @@ class Tasks {
   handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { tasks, currentTask } = this.component.state;
+    const { currentTask } = this.component.state;
 
     try {
-      const { data } = await addTask({ task: currentTask });
-      this.component.setState({
-        tasks: [...tasks, data],
-        currentTask: ''
-      });
+      await addTask({ task: currentTask });
+      this.component.setState({ currentTask: '' });
+
+      // 🔁 Always re-sync from backend
+      await this.loadTasks();
     } catch (error) {
       console.error(error);
     }
   };
+
 
   handleUpdate = async (id) => {
     const originalTasks = [...this.component.state.tasks];

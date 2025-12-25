@@ -8,6 +8,22 @@ User → Ingress/NodePort → Frontend Service → Frontend Pods (NGINX)
 ```
 
 
+###
+```sh
+# To start the containers
+docker compose up --build
+
+# Verify
+http://localhost:3000
+
+http://localhost:8081/ok
+
+curl http://localhost:8081/api/tasks
+
+# To the containers
+docker compose down -v
+```
+
 ### Complete Deployment Order
 ```sh
 # 1. Namespace (if not exists)
@@ -92,5 +108,5 @@ kubectl exec -it <frontend-pod> -n dev -- cat /etc/nginx/conf.d/default.conf
 kubectl logs <frontend-pod> -n dev
 
 # Test API from frontend pod
-kubectl exec -it <frontend-pod> -n dev -- curl http://backend-service.dev.svc.cluster.local:8080/api/tasks
+kubectl exec -it <frontend-pod> -n dev -- curl http://backend-svc.dev.svc.cluster.local:8080/api/tasks
 ```

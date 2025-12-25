@@ -30,7 +30,7 @@ services:
     ports:
       - "3000:80"
     environment:
-      REACT_APP_BACKEND_URL: http://localhost:8081/api/tasks
+      REACT_APP_BACKEND_URL: http://localhost:8080/api/tasks
     depends_on:
       - backend
 

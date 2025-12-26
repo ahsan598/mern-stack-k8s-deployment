@@ -367,7 +367,3 @@ This project is a practical reference for learning **Docker + Kubernetes** by de
 - [KIND Guide](https://kind.sigs.k8s.io/)
 - [Minikube Guide](https://minikube.sigs.k8s.io/docs/start/)
 
-
-
-
-

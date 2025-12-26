@@ -2,35 +2,42 @@
 
 
 ### 🎯 Overview
-This project focuses on containerizing an MERN application and deploying it on Kubernetes with routing using Ingress.
+This project focuses on containerizing an **MERN** application and deploying it on **Kubernetes** with routing using **Ingress**.
 
 It is designed to simulate real-world cloud deployment practices, covering:
-- Dockerizing frontend and backend
-- Running MongoDB with persistent storage
-- Deploying the full stack on Kubernetes
-- Using ConfigMaps and Secrets
-- Exposing the app using NGINX Ingress
-- Supporting local clusters (Kind / Minikube / Docker Desktop)
+- **Dockerizing** frontend and backend
+- Running **MongoDB** with **persistent storage**
+- Deploying the full stack on **Kubernetes**
+- Using **ConfigMaps and Secrets**
+- Exposing the app using **NGINX Ingress**
+- Supporting local clusters (**Kind/Minikube**)
 
-The goal is to provide a hands-on reference implementation for building and deploying modern full-stack applications using Kubernetes.
+The goal is to provide a hands-on reference implementation for building and deploying **full-stack** application using **Kubernetes**.
 
 
-### 🛠️ Tech Stack
-- Docker
-- Kubernetes
-- NGINX Ingress
-- MongoDB
-- Node.js / Express
-- React
+### 🛠️ Technology Stack
+| Technology            | Purpose                                              |
+| --------------------- | ---------------------------------------------------- |
+| **Docker**            | Containerization of frontend and backend services    |
+| **Kubernetes**        | Orchestration, scaling, and management of containers |
+| **NGINX Ingress**     | External traffic routing into the cluster            |
+| **MongoDB**           | Persistent NoSQL database                            |
+| **Node.js / Express** | Backend REST API server                              |
+| **React**             | Frontend user interface                              |
 
 
 ### 🧪 Environments Supported
-- **Local:** Kind, Minikube, Docker Desktop
-- **Cloud:** EKS, GKE, AKS
+| Environment            | Usage                        |
+| ---------------------- | ---------------------------- |
+| **Kind**               | Local Kubernetes development |
+| **Minikube**           | Local Kubernetes development |
+| **EKS (AWS)**          | Cloud deployment             |
+| **AKS (Azure)**        | Cloud deployment             |
 
 
 ### ⚙️ Architect Diagram
-![architect](/assets/images/architect-diagram.gif)
+![architect](/assets/images/architect-diagram.png)
+
 
 
 ### 🧪 Local Testing (Before Kubernetes)
@@ -319,14 +326,14 @@ kubectl apply -f k8s_manifests/database/statefulset.yaml
 
 
 ### 📝 Notes
-- MongoDB uses PVC — data survives pod restarts
+- MongoDB uses **PVC** — data survives pod restarts
 - Backend runs as Deployment
-- Frontend uses NGINX via ConfigMap
-- All services are internal (ClusterIP); access via Ingress
+- Frontend uses **NGINX** via **ConfigMap**
+- All services are internal (ClusterIP); access via **Ingress**
 
 
 ### 🧾 Summary
-This repository contains a MERN stack application deployed on Kubernetes with:
+This repository contains a **MERN** stack application deployed on **Kubernetes** with:
 - React frontend
 - Node.js / Express backend
 - MongoDB database with persistent volume
@@ -335,7 +342,7 @@ This repository contains a MERN stack application deployed on Kubernetes with:
 
 
 ### 🧱 Conclusion
-This project is a practical reference for learning Docker + Kubernetes by deploying a real multi-tier application stack.
+This project is a practical reference for learning **Docker + Kubernetes** by deploying a real multi-tier application stack.
 
 
 ### 📚 References
@@ -345,5 +352,5 @@ This project is a practical reference for learning Docker + Kubernetes by deploy
 - [MongoDB on Kubernetes](https://www.mongodb.com/kubernetes)
 - [Express.js Documentation](https://expressjs.com/)
 - [React Documentation](https://react.dev/)
-- [KIND Docs](https://kind.sigs.k8s.io/)
-- [Minikube Docs](https://minikube.sigs.k8s.io/docs/start/)
+- [KIND Guide](https://kind.sigs.k8s.io/)
+- [Minikube Guide](https://minikube.sigs.k8s.io/docs/start/)

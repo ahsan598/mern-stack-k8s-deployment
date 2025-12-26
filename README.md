@@ -15,24 +15,16 @@ It is designed to simulate real-world cloud deployment practices, covering:
 The goal is to provide a hands-on reference implementation for building and deploying **full-stack** application using **Kubernetes**.
 
 
-### 🛠️ Technology Stack
-| Technology            | Purpose                                              |
-| --------------------- | ---------------------------------------------------- |
-| **Docker**            | Containerization of frontend and backend services    |
-| **Kubernetes**        | Orchestration, scaling, and management of containers |
-| **NGINX Ingress**     | External traffic routing into the cluster            |
-| **MongoDB**           | Persistent NoSQL database                            |
-| **Node.js / Express** | Backend REST API server                              |
-| **React**             | Frontend user interface                              |
+### 🛠️ Prerequisites
+
+| Tool        | Purpose                                                   | Documentation |
+|-------------|-----------------------------------------------------------|---------------|
+| **Node.js** | JavaScript runtime used to build and run the backend service | [Install Node.js](https://nodejs.org/en/download) |
+| **npm**     | Package manager for installing and managing dependencies | [npm Documentation](https://docs.npmjs.com/) |
+| **Docker**  | Builds and runs container images for application services | [Install Docker](https://docs.docker.com/engine/install/) |
+| **KIND** *(or any Kubernetes tool)* | Used to deploy and test the application locally on Kubernetes | [Install Kind](https://kind.sigs.k8s.io/docs/user/quick-start/) |
 
 
-### 🧪 Environments Supported
-| Environment            | Usage                        |
-| ---------------------- | ---------------------------- |
-| **Kind**               | Local Kubernetes development |
-| **Minikube**           | Local Kubernetes development |
-| **EKS (AWS)**          | Cloud deployment             |
-| **AKS (Azure)**        | Cloud deployment             |
 
 
 ### ⚙️ Architect Diagram

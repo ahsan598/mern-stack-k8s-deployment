@@ -1,17 +1,23 @@
 {
-  "name": "server",
+  "name": "todo-backend",
   "version": "1.0.0",
-  "description": "Backend API server",
+  "description": "Simple Todo App Backend API",
+  "type": "module",
   "main": "index.js",
-  "type": "commonjs",
+  "private": true,
+
+  "engines": {
+    "node": ">=18"
+  },
+
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No tests configured\""
   },
-  "keywords": ["nodejs", "express", "mongodb", "todo"],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["nodejs", "express", "mongodb", "todo", "api"],
+  "license": "MIT",
+
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",

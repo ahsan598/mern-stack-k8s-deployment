@@ -51,6 +51,7 @@ spec:
         volumeMounts:
         - name: mongodb-storage
           mountPath: /data/db
+          subPath: mongodb
 
         resources:
           requests:

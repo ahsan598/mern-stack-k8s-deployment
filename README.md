@@ -27,7 +27,7 @@ The goal is to provide a hands-on reference implementation for building and depl
 
 
 ### ⚙️ Architect Diagram
-![architect](/assets/images/architect-diagram.png)
+![architect](/assets/architect-diagram.png)
 
 
 ### 🧪 Local Testing (Docker Compose)
@@ -73,7 +73,7 @@ kubectl apply -f k8s_manifests/database/
 # Check MongoDb connectivity
 kubectl exec -it mongodb-0 -n todo-lab -- mongosh -u admin -p password123 --authenticationDatabase admin
 ```
-![database-connection](/assets/images/db-connection-verify.png)
+![database-connection](/assets/db-connection-verify.png)
 
 
 **Step-3: Deploy Backend API**
@@ -85,7 +85,7 @@ kubectl apply -f k8s_manifests/backend/
 # Check backend logs
 kubectl logs -f deployment/backend -n todo-lab
 ```
-![backend-connection](/assets/images/connection-verify.png)
+![backend-connection](/assets/connection-verify.png)
 
 
 **Step-4: Deploy Frontend UI**
@@ -106,7 +106,7 @@ kubectl get pvc -n todo-lab
 # Check endpoints
 kubectl get ep -n todo-lab
 ```
-![deployment](/assets/images/deployment-verify.png)
+![deployment](/assets/deployment-verify.png)
 
 
 ### 🌐 Expose Application with Ingress
@@ -119,14 +119,14 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 # Verify installation
 kubectl get pods -n ingress-nginx
 ```
-![ingress](/assets/images/ingress.png)
+![ingress](/assets/ingress.png)
 
 
 3. Access the Application
 - Get your cluster IP (or localhost if using Docker Desktop/Kind).
 Open `http://<clusterip:80>` in your browser.
 
-![access](/assets/images/browsing-verify.png)
+![access](/assets/browsing-verify.png)
 
 
 
